@@ -1,33 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   inter.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 20:18:46 by megiazar          #+#    #+#             */
-/*   Updated: 2025/06/26 15:45:57 by megiazar         ###   ########.fr       */
+/*   Created: 2025/06/26 16:12:16 by megiazar          #+#    #+#             */
+/*   Updated: 2025/06/26 19:57:11 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <unistd.h>
 
-char *ft_strdup(char *src)
+void inter(char *s1, char *s2)
 {
-	char *tmp;
-	int len = 0;
 	int i = 0;
+	int j;
+	int seen[256] = {0};
 
-	while (src[len])
-		len++;
-	tmp = malloc(sizeof(char) * len + 1);
-	if (!tmp)
-		return (NULL);
-	while (src[i])
+	while (s1[i])
 	{
-		tmp[i] = src[i];
+		j = 0;
+		while (s2[j])
+		{
+			if (s1[i] == s2[j] && !seen[(unsigned char)s1[i]])
+			{
+				seen[(unsigned char)s1[i]] = 1;
+				write(1, &s1[i], 1);
+				break ;
+				}
+			j++;
+		}
 		i++;
 	}
-	tmp[i] = '\0';
-	return (tmp);
+
+}
+
+int main(int ac, char *av[])
+{
+	if (ac == 3)
+		inter(av[1], av[2]);
+	write(1, "\n", 1);
+	return (0);
 }

@@ -1,33 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strprbrk.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 20:18:46 by megiazar          #+#    #+#             */
-/*   Updated: 2025/06/26 15:45:57 by megiazar         ###   ########.fr       */
+/*   Created: 2025/06/26 15:46:25 by megiazar          #+#    #+#             */
+/*   Updated: 2025/06/26 15:56:47 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <stddef.h>
 
-char *ft_strdup(char *src)
+char *ft_strpbrk(const char *s1, const char *s2)
 {
-	char *tmp;
-	int len = 0;
-	int i = 0;
+	int i;
+	int j;
 
-	while (src[len])
-		len++;
-	tmp = malloc(sizeof(char) * len + 1);
-	if (!tmp)
-		return (NULL);
-	while (src[i])
+	i = 0;
+	while (s1[i])
 	{
-		tmp[i] = src[i];
+		j = 0;
+		while (s2[j])
+		{
+			if (s2[j] == s1[i])
+				return (char *)&s1[i];
+			j++;
+		}
 		i++;
 	}
-	tmp[i] = '\0';
-	return (tmp);
+	return (NULL);
+}
+
+#include <stdio.h>
+
+int main()
+{
+	char *s1 = "hl";
+	char *s2 = "aeiou";
+
+	char *res = ft_strpbrk(s1, s2);
+	if (res)
+		printf("First match: %c\n", *res);
+	else
+		printf("No match\n");
 }

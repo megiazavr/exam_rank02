@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_is_power_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 20:18:46 by megiazar          #+#    #+#             */
-/*   Updated: 2025/06/26 15:45:57 by megiazar         ###   ########.fr       */
+/*   Created: 2025/06/26 17:32:18 by megiazar          #+#    #+#             */
+/*   Updated: 2025/06/26 17:38:41 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-char *ft_strdup(char *src)
+int is_power_of_2(unsigned int n)
 {
-	char *tmp;
-	int len = 0;
-	int i = 0;
+	int test = 1;
 
-	while (src[len])
-		len++;
-	tmp = malloc(sizeof(char) * len + 1);
-	if (!tmp)
-		return (NULL);
-	while (src[i])
+	while (test <= n)
 	{
-		tmp[i] = src[i];
-		i++;
+		if (test == n)
+			return (1);
+		test = test * 2;
 	}
-	tmp[i] = '\0';
-	return (tmp);
+	return (0);
+}
+
+#include <stdio.h>
+
+int main()
+{
+	printf("%d", is_power_of_2(16));
 }

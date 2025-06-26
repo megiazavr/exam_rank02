@@ -1,33 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 20:18:46 by megiazar          #+#    #+#             */
-/*   Updated: 2025/06/26 15:45:57 by megiazar         ###   ########.fr       */
+/*   Created: 2025/06/26 15:58:19 by megiazar          #+#    #+#             */
+/*   Updated: 2025/06/26 16:12:04 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-char *ft_strdup(char *src)
+char *ft_strrev(char *str)
 {
-	char *tmp;
-	int len = 0;
-	int i = 0;
+	int i;
+	int len;
+	char tmp;
 
-	while (src[len])
+	i = 0;
+	len = 0;
+	while (str[len])
 		len++;
-	tmp = malloc(sizeof(char) * len + 1);
-	if (!tmp)
-		return (NULL);
-	while (src[i])
+	while (i < len - 1)
 	{
-		tmp[i] = src[i];
+		tmp = str[i];
+		str[i] = str[len - 1];
+		str[len - 1] = tmp;
 		i++;
+		len --;
 	}
-	tmp[i] = '\0';
-	return (tmp);
+	return (str);
+}
+
+int main(void)
+{
+	char s[] = "Hello world";
+	ft_strrev(s);
+	printf("%s\n", s);
+	return (0);
 }

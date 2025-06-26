@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   last_word.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 20:18:46 by megiazar          #+#    #+#             */
-/*   Updated: 2025/06/26 15:45:57 by megiazar         ###   ########.fr       */
+/*   Created: 2025/06/26 16:54:48 by megiazar          #+#    #+#             */
+/*   Updated: 2025/06/26 17:12:24 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include <unistd.h>
 
-char *ft_strdup(char *src)
+void last_word(char *str)
 {
-	char *tmp;
-	int len = 0;
-	int i = 0;
+	int i;
 
-	while (src[len])
-		len++;
-	tmp = malloc(sizeof(char) * len + 1);
-	if (!tmp)
-		return (NULL);
-	while (src[i])
-	{
-		tmp[i] = src[i];
+	i = 0;
+	while (str[i] != '\0')
 		i++;
-	}
-	tmp[i] = '\0';
-	return (tmp);
+	i--;
+	while (i >= 0 && (str[i] == ' ' || str[i] == '\t'))
+		i--;
+	int end = i;
+	while (i >= 0 && (str[i] != ' ' && str[i] != '\t'))
+		i--;
+	i++;
+	while (i <= end)
+		write (1, &str[i++], 1);
+}
+
+int main(int ac, char *av[])
+{
+	if (ac == 2)
+		last_word(av[1]);
+	write(1, "\n", 1);
+	return (0);
 }

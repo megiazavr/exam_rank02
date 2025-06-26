@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   max.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: megiazar <megiazar@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/25 20:18:46 by megiazar          #+#    #+#             */
-/*   Updated: 2025/06/26 15:45:57 by megiazar         ###   ########.fr       */
+/*   Created: 2025/06/26 17:39:30 by megiazar          #+#    #+#             */
+/*   Updated: 2025/06/26 17:42:26 by megiazar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-
-char *ft_strdup(char *src)
+int max(int* tab, unsigned int len)
 {
-	char *tmp;
-	int len = 0;
-	int i = 0;
+	unsigned int i = 0;
+	int max;
 
-	while (src[len])
-		len++;
-	tmp = malloc(sizeof(char) * len + 1);
-	if (!tmp)
-		return (NULL);
-	while (src[i])
+	if (len == 0)
+		return (0);
+	max = tab[0];
+	while (i < len)
 	{
-		tmp[i] = src[i];
+		if (tab[i] > max)
+			max = tab[i];
 		i++;
 	}
-	tmp[i] = '\0';
-	return (tmp);
+	return (max);
+}
+
+#include <stdio.h>
+
+int	max(int* tab, unsigned int len);
+
+int	main(void)
+{
+	int arr[] = {3, 7, 2, 9, 4};
+	printf("Max = %d\n", max(arr, 5));
+	return (0);
 }
